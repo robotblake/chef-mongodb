@@ -1,0 +1,22 @@
+# Ubuntu upstart file at /etc/init/mongodb_<%= @name %>.conf
+
+limit nofile 20000 20000
+
+kill timeout 300 # wait 300s between SIGTERM and SIGKILL.
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+script
+  ENABLE_MONGODB="yes"
+  DAEMON_NAME="mongodb_<%= @name %>"
+  DAEMON_OPTS="--config /etc/mongodb.conf"
+
+  if [ -f /etc/default/$DAEMON_NAME ]; then
+    . /etc/default/$DAEMON_NAME
+  fi
+
+  if [ "x$ENABLE_MONGODB" = "xyes" ]; then
+    exec start-stop-daemon --start --quiet --chuid mongodb --name $DAEMON_NAME --exec /usr/bin/mongod -- $DAEMON_OPTS
+  fi
+end script

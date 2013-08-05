@@ -1,0 +1,6 @@
+/.bundle
+/.kitchen
+/.vagrant
+/bin
+/Berksfile.lock
+/Gemfile.lock

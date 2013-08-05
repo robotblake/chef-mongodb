@@ -1,0 +1,23 @@
+##
+# mongodb config at /etc/default/mongodb_<%= @name %>
+# Managed by Chef - Local changes will be nuked from orbit (just to be sure)
+##
+
+DAEMON_OPTS=""
+<% if @port -%>
+DAEMON_OPTS="$DAEMON_OPTS --port <%= @port %>"
+<% end -%>
+<% if @bind_ip -%>
+DAEMON_OPTS="$DAEMON_OPTS --bind_ip <%= @bind_ip %>"
+<% end -%>
+DAEMON_OPTS="$DAEMON_OPTS --logpath <%= @logpath %> --logappend"
+<% if @auth -%>
+DAEMON_OPTS="$DAEMON_OPTS --auth"
+<% end -%>
+DAEMON_OPTS="$DAEMON_OPTS --dbpath <%= @dbpath %>"
+<% if @quota_files -%>
+DAEMON_OPTS="$DAEMON_OPTS --quota --quotaFiles <%= @quota_files %>"
+<% end -%>
+<% if @repl_set -%>
+DAEMON_OPTS="$DAEMON_OPTS --replSet <%= @repl_set %>"
+<% end -%>
