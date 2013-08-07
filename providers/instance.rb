@@ -41,6 +41,7 @@ action :create do
   template "mongodb-#{name}-sysvinit" do
     path "/etc/init.d/mongodb-#{name}.conf"
     source "mongodb_sysvinit.erb"
+    cookbook "mongodb"
     variables({
       :name => name,
     })
@@ -50,6 +51,7 @@ action :create do
   template "mongodb-#{name}-config" do
     path "/etc/default/mongodb-#{name}"
     source "mongodb_default.erb"
+    cookbook "mongodb"
     variables({
       :name => name,
       :port => new_resource.port,
