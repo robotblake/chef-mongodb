@@ -39,7 +39,7 @@ action :create do
   #end
 
   template "mongodb-#{name}-sysvinit" do
-    path "/etc/init.d/mongodb-#{name}.conf"
+    path "/etc/init.d/mongodb-#{name}"
     source "mongodb_sysvinit.erb"
     cookbook "mongodb"
     variables({
