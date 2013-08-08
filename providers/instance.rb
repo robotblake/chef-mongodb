@@ -42,6 +42,9 @@ action :create do
     path "/etc/init.d/mongodb-#{name}"
     source "mongodb_sysvinit.erb"
     cookbook "mongodb"
+    owner "root"
+    group "root"
+    mode 0755
     variables({
       :name => name,
     })
@@ -52,6 +55,9 @@ action :create do
     path "/etc/default/mongodb-#{name}"
     source "mongodb_default.erb"
     cookbook "mongodb"
+    owner "root"
+    group "root"
+    mode 0644
     variables({
       :name => name,
       :port => new_resource.port,
